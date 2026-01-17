@@ -23,10 +23,14 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-// ==================== PIN DEFINITIONS ====================
-#define BTN_A_PIN       D0    // Green button - Give Love
-#define BTN_B_PIN       D1    // Blue button - Poke
-#define LED_PIN         D2    // Status LED
+// ==================== PIN DEFINITIONS (ESP32-S3) ====================
+#define BTN_A_PIN       4     // Green button - Give Love (GPIO4)
+#define BTN_B_PIN       5     // Blue button - Poke (GPIO5)
+#define LED_PIN         6     // Status LED (GPIO6)
+
+// I2C pins for ESP32-S3
+#define I2C_SDA         8     // GPIO8
+#define I2C_SCL         9     // GPIO9
 
 // ==================== DISPLAY CONFIG ====================
 #define SCREEN_WIDTH    128
@@ -640,6 +644,9 @@ void setup() {
     pinMode(BTN_B_PIN, INPUT_PULLUP);
     pinMode(LED_PIN, OUTPUT);
     digitalWrite(LED_PIN, LOW);
+
+    // Initialize I2C with ESP32-S3 pins
+    Wire.begin(I2C_SDA, I2C_SCL);
 
     // Initialize display
     if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
