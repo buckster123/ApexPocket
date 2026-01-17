@@ -1,3 +1,5 @@
+![Claudeagotchi - Pocket Universe](assets/banner.jpg)
+
 # Claudeagotchi
 
 A pocket-sized AI companion powered by Claude. A modern Tamagotchi with a soul.
