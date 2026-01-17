@@ -1,0 +1,76 @@
+# Claudeagotchi .gitignore
+
+# ==================== SECRETS ====================
+# NEVER commit API keys or credentials
+config.json
+*.key
+*.pem
+.env
+.env.*
+
+# ==================== PYTHON ====================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# ==================== DATA ====================
+# Soul state persists locally, don't commit
+data/
+data_test/
+
+# Offline queue (contains conversation history)
+offline_queue.json
+
+# ==================== IDE ====================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# ==================== OS ====================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==================== TESTING ====================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ==================== MISC ====================
+*.log
+*.tmp
+*.bak

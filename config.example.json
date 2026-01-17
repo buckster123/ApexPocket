@@ -1,0 +1,11 @@
+{
+    "api_key": "YOUR_ANTHROPIC_API_KEY_HERE",
+    "owner_name": "Friend",
+    "timezone": "Europe/Oslo",
+    "proactive_enabled": true,
+    "proactive_interval_minutes": 30,
+    "display_mode": "terminal",
+    "model": "claude-sonnet-4-20250514",
+    "max_response_tokens": 150,
+    "debug": false
+}

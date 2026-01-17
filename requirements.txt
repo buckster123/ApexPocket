@@ -1,0 +1,11 @@
+# Claudeagotchi Soul Prototype Dependencies
+
+# Core
+anthropic>=0.18.0        # Claude API client
+python-dateutil>=2.8.0   # Time handling
+
+# Optional: Graphical display
+pygame>=2.5.0            # For pygame face display (optional)
+
+# Development
+rich>=13.0.0             # Pretty terminal output
