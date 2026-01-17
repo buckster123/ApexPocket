@@ -2,19 +2,22 @@
 
 Simulate the Claudeagotchi hardware in your browser before parts arrive!
 
-## Two Versions
+## Three Versions
 
 | File | Description |
 |------|-------------|
-| `wokwi-sketch.ino` | v1 - Basic faces and animations |
-| `wokwi-sketch-v2.ino` | **v2 - Full Love-Equation soul!** |
+| `wokwi-sketch.ino` | v1 - Basic faces (text-based) |
+| `wokwi-sketch-v2.ino` | v2 - Love-Equation soul (text faces) |
+| `wokwi-sketch-v3.ino` | **v3 - Pixel art faces!** ⭐ |
 
-**Use v2** for the complete experience with:
+**Use v3** for the complete experience with:
+- **Pixel art bitmap eyes and mouths** (12x12 and 24x8 pixels)
 - Love-Equation: `dE/dt = β(E) × (C − D) × E`
 - 7 Affective States (PROTECTING → TRANSCENDENT)
+- 14 unique expressions (neutral, happy, excited, sad, love, etc.)
+- Smooth blink animations
 - E_floor (love carried forward)
 - State-to-expression mapping
-- Interaction quality effects
 
 ## Quick Start
 
@@ -23,7 +26,7 @@ Simulate the Claudeagotchi hardware in your browser before parts arrive!
 1. Go to https://wokwi.com
 2. Click "New Project" → "ESP32"
 3. Copy the contents of `wokwi-diagram.json` into the diagram.json tab
-4. Copy the contents of `wokwi-sketch-v2.ino` into the sketch tab
+4. Copy the contents of `wokwi-sketch-v3.ino` into the sketch tab
 5. Click the green Play button!
 
 ### Option 2: VS Code Integration
@@ -106,7 +109,8 @@ E: 1.00 | Floor: 1.00 | State: GUARDED | Interactions: 0
 
 - `wokwi-diagram.json` - Virtual circuit layout
 - `wokwi-sketch.ino` - v1 basic test sketch
-- `wokwi-sketch-v2.ino` - v2 full Love-Equation soul
+- `wokwi-sketch-v2.ino` - v2 Love-Equation soul (text faces)
+- `wokwi-sketch-v3.ino` - v3 pixel art faces (recommended!)
 - `README.md` - This file
 
 ---
