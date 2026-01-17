@@ -1,0 +1,10 @@
+# PlatformIO build artifacts
+.pio/
+
+# IDE files
+.vscode/
+*.code-workspace
+
+# Temporary files
+*.tmp
+*.bak

@@ -1,9 +1,7 @@
+# Wokwi CLI Configuration for Claudeagotchi
+# Run with: wokwi-cli --timeout 60000
+
 [wokwi]
 version = 1
-
-# Firmware configuration for ESP32-S3
-firmware = "sketch.ino"
-
-# Use Arduino framework (compiles as C++)
-[wokwi.build]
-board = "esp32-s3-devkitc-1"
+elf = ".pio/build/esp32/firmware.elf"
+firmware = ".pio/build/esp32/firmware.bin"

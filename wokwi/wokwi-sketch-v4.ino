@@ -280,6 +280,7 @@ String chatWithClaude(const char* message);
 void saveState();
 void loadState();
 const char* stateName(AffectiveState state);
+void printStatus();
 
 // ==================== SETUP ====================
 void setup() {
