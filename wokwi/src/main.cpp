@@ -51,9 +51,14 @@ const char* WIFI_PASS = "";
 
 // ==================== CLAUDE API CONFIG ====================
 // Set your API key here or leave empty to skip API calls
-const char* CLAUDE_API_KEY = "";  // Your Anthropic API key
+const char* CLAUDE_API_KEY = "";  // Your Anthropic API key (sk-ant-...)
 const char* CLAUDE_MODEL = "claude-sonnet-4-20250514";
 const char* OWNER_NAME = "Friend";
+
+// ==================== TEST MODE ====================
+// Note: HTTPS doesn't work in Wokwi CLI (SSL limitation)
+// Set true to test on real hardware or browser Wokwi
+#define TEST_API_ON_BOOT    false
 
 // ==================== TIMING CONSTANTS ====================
 #define LONG_PRESS_MS       800
@@ -942,6 +947,14 @@ void connectWiFi() {
         wifiConnected = true;
         Serial.print(F("\n[WiFi] Connected! IP: "));
         Serial.println(WiFi.localIP());
+
+        #if TEST_API_ON_BOOT
+        // Auto-test API connection
+        Serial.println(F("[TEST] Testing Claude API..."));
+        String testResponse = chatWithClaude("Hello! This is a connection test.");
+        Serial.print(F("[TEST] API Response: "));
+        Serial.println(testResponse);
+        #endif
     } else {
         wifiConnected = false;
         Serial.println(F("\n[WiFi] Connection failed"));

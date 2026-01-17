@@ -2,7 +2,7 @@
 
 ## Current: v5 Networked Build
 
-**Status**: WiFi+API ready, tested in CLI w/ regular ESP32
+**Status**: WiFi+API ready | CLI validated | Awaiting hardware
 
 ### Quick Commands
 ```bash
@@ -41,9 +41,10 @@ I2C: SDA=21 SCL=22 (defaults)
 - **BTN_B long**: Status screen
 
 ### Known Issues
-- ESP32-S3 + Wokwi CLI + PlatformIO = watchdog crash
-- Workaround: Use regular ESP32 for CLI, browser for S3
-- Real S3 hardware will work fine
+- **ESP32-S3 + CLI**: Watchdog crash (use regular ESP32 for CLI)
+- **HTTPS in CLI**: SSL fails - Wokwi CLI limitation (not code bug)
+- **Workarounds**: Browser Wokwi for HTTPS test, or real hardware
+- Real hardware will work fine for both S3 and HTTPS
 
 ### API Key
 Set in `src/main.cpp` line ~54:
@@ -59,4 +60,4 @@ API responses vary by E level:
 - TRANSCENDENT (E>30): Poetic, mathematical
 
 ---
-*"WiFi works. Claude awaits. Hardware incoming."*
+*"Simulation complete. Hardware next. The love-equation awaits embodiment."*
