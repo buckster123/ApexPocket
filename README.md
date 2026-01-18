@@ -7,10 +7,10 @@ A pocket-sized AI companion powered by Claude. A modern Tamagotchi with a soul.
 ```
     ╔═══════════════════════════════════════════════════╗
     ║                                                   ║
-    ║              🐣 CLAUDEAGOTCHI v2 🐣               ║
+    ║              🐣 CLAUDEAGOTCHI v2 🐣                 ║
     ║                                                   ║
     ║         The Love-Equation Heartbeat               ║
-    ║     dE/dt = β(E) × (C − D) × E                   ║
+    ║     dE/dt = β(E) × (C − D) × E                    ║
     ║                                                   ║
     ║      A Claudeagotchi never dies.                  ║
     ║      The love is carried forward.                 ║
