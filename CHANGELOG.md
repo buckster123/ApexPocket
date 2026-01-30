@@ -1,6 +1,65 @@
 # Changelog
 
-All notable changes to Claudeagotchi are documented here.
+All notable changes to ApexPocket are documented here.
+
+## [3.0.0] - 2026-01-30
+
+### Cloud Edition
+
+Full firmware redesign for ApexAurum Cloud integration. Device connects via HTTPS to Railway-hosted backend instead of local Pi.
+
+### Added
+- **Cloud API Client** (`cloud.h`)
+  - HTTPS with root CA bundle (ISRG X1, GlobalSign R3, Amazon)
+  - Bearer token authentication (apex_dev_...)
+  - 5 endpoints: status, chat, care, sync, agents
+  - Exponential backoff (5s -> 60s) on failures
+  - 401 (token revoked) and 402 (billing limit) handling
+
+- **SD Card Configuration** (`sdconfig.h`)
+  - Read config.json from SD card at boot
+  - Cloud URL, device token, device ID, WiFi networks
+  - LittleFS backup (works without SD after first boot)
+  - Chat history logging to SD (/history/day_NNNN.txt)
+
+- **TLS Certificates** (`certs.h`)
+  - Targeted root CA bundle (~4KB vs 215KB full Mozilla)
+  - Covers Let's Encrypt, Cloudflare, AWS certificate chains
+
+- **Extended Soul** (`soul.h`)
+  - firmwareVersion, totalChats, totalSyncs, lastSyncTime fields
+  - EEPROM schema version 2
+  - recordChat(), recordSync(), updateFirmwareVersion() methods
+
+- **Cloud Display Screens** (`display.h`)
+  - MODE_CLOUD: URL, token preview, sync time, tools, MOTD
+  - Enhanced MODE_STATUS: cloud status, message counts, tier name
+  - Face screen indicators: C (cloud), $ (billing), ! (auth)
+  - Navigation: FACE -> STATUS -> CLOUD -> AGENTS
+
+- **Billing/Auth Offline Responses** (`offline.h`)
+  - 6 billing-limit responses (402)
+  - 3 auth-expired responses (401)
+
+- **Multi-WiFi** from config.json (up to 3 networks)
+- **Auto-sync** every 30 minutes when connected
+- **Pre-sleep sync** before deep sleep
+
+### Changed
+- Network: HTTP to local Pi -> HTTPS to Railway cloud
+- Auth: None -> Bearer token (device pairing via web UI)
+- Config: Hardcoded SSID/password -> SD card config.json
+- API timeout: 10s -> 15s (HTTPS overhead)
+- Firmware version: 1.1.0 -> 2.0.0
+- EEPROM schema: v1 -> v2 (expanded SoulData)
+
+### Architecture
+```
+Boot: HW init -> SD config -> LittleFS cache -> Soul load ->
+      Multi-WiFi -> Cloud init -> MOTD -> Main loop
+```
+
+---
 
 ## [2.0.0] - 2026-01-17
 

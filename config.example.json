@@ -1,11 +1,10 @@
 {
-    "api_key": "YOUR_ANTHROPIC_API_KEY_HERE",
-    "owner_name": "Friend",
-    "timezone": "Europe/Oslo",
-    "proactive_enabled": true,
-    "proactive_interval_minutes": 30,
-    "display_mode": "terminal",
-    "model": "claude-sonnet-4-20250514",
-    "max_response_tokens": 150,
-    "debug": false
+    "cloud_url": "https://backend-production-507c.up.railway.app",
+    "device_token": "apex_dev_YOUR_DEVICE_TOKEN_HERE",
+    "device_id": "YOUR_DEVICE_UUID_HERE",
+    "api_version": "v1",
+    "wifi": [
+        {"ssid": "YOUR_WIFI_NAME", "pass": "YOUR_WIFI_PASSWORD"},
+        {"ssid": "BACKUP_WIFI", "pass": "BACKUP_PASSWORD"}
+    ]
 }

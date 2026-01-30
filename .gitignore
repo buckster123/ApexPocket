@@ -70,6 +70,12 @@ htmlcov/
 .tox/
 .nox/
 
+# ==================== PLATFORMIO ====================
+.pio/
+.pioenvs/
+.piolibdeps/
+.piobuild/
+
 # ==================== MISC ====================
 *.log
 *.tmp

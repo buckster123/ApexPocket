@@ -1,0 +1,223 @@
+/*
+ * ApexPocket Configuration - Cloud Edition
+ *
+ * Hardware feature flags, pin definitions, cloud settings.
+ * WiFi credentials and cloud tokens now loaded from SD card config.json
+ */
+
+#ifndef APEXPOCKET_CONFIG_H
+#define APEXPOCKET_CONFIG_H
+
+// ============================================================================
+// HARDWARE VARIANT
+// ============================================================================
+// Uncomment ONE of these:
+// #define VARIANT_WOKWI        // Wokwi simulation (ESP32 DevKit)
+#define VARIANT_XIAO_S3         // Seeed XIAO ESP32-S3 (production)
+// #define VARIANT_DEVKIT       // Generic ESP32 DevKit
+
+// ============================================================================
+// FEATURE FLAGS
+// ============================================================================
+#define FEATURE_OLED            // SSD1306 128x64 OLED display
+#define FEATURE_WIFI            // WiFi connectivity
+#define FEATURE_BUTTONS         // Physical buttons
+#define FEATURE_LED             // Status LED
+#define FEATURE_BUZZER          // Piezo buzzer for audio feedback
+#define FEATURE_BATTERY         // Battery voltage monitoring (ADC)
+#define FEATURE_EEPROM          // I2C EEPROM/FRAM for soul backup
+#define FEATURE_DEEPSLEEP       // Deep sleep for battery life
+#define FEATURE_ANIMATIONS      // Smooth face animations
+#define FEATURE_RICH_OFFLINE    // Extended offline responses
+#define FEATURE_SD              // External SD card for config & history
+
+// Cloud features (new in v2.0)
+#define FEATURE_CLOUD           // Cloud API support (HTTPS)
+#define FEATURE_SD_CONFIG       // SD card configuration (config.json)
+#define FEATURE_CHAT_LOG        // Chat history logging to SD
+#define FEATURE_MULTI_WIFI      // Multiple WiFi networks from config
+#define FEATURE_OTA_CHECK       // OTA update check on sync
+// #define FEATURE_BLE          // Bluetooth Low Energy (future)
+// #define FEATURE_VIBRATION    // Haptic feedback motor
+// #define FEATURE_RGB          // RGB LED (NeoPixel)
+// #define FEATURE_SPEAKER      // I2S audio output
+
+// ============================================================================
+// PIN DEFINITIONS BY VARIANT
+// ============================================================================
+
+#ifdef VARIANT_WOKWI
+    // Wokwi ESP32 DevKit simulation
+    #define PIN_BTN_A       4
+    #define PIN_BTN_B       5
+    #define PIN_LED         2
+    #define PIN_I2C_SDA     21
+    #define PIN_I2C_SCL     22
+    #define PIN_BUZZER      15
+    #define PIN_BATTERY     34      // ADC1_CH6
+    #define PIN_VIBRATION   13
+    #define USE_LITTLEFS    false
+#endif
+
+#ifdef VARIANT_XIAO_S3
+    // Seeed XIAO ESP32-S3 - ApexPocket MAX Build
+    #define PIN_BTN_A       1       // D0 - Also WAKE pin
+    #define PIN_BTN_B       2       // D1
+    #define PIN_LED         21      // Built-in LED
+    #define PIN_I2C_SDA     5       // D4 - OLED + 24LC32 EEPROM
+    #define PIN_I2C_SCL     6       // D5 - OLED + 24LC32 EEPROM
+    #define PIN_BUZZER      7       // D6 - M5Stack Buzzer SIG
+    #define PIN_BATTERY     3       // D2/A2 - ADC for LiPo monitoring
+    #define PIN_VIBRATION   4       // D3 - Future: haptic motor
+    #define USE_LITTLEFS    true
+    #define HAS_PSRAM       false   // Regular XIAO S3 (not Sense)
+
+    // SD Card SPI (Pololu breakout)
+    // XIAO S3 SPI pins: D8=SCK, D9=MISO, D10=MOSI, D7=CS
+    #define FEATURE_SD_CARD
+    #define PIN_SD_CS       44      // D7
+    #define PIN_SD_MOSI     9       // D9
+    #define PIN_SD_MISO     8       // D8
+    #define PIN_SD_SCK      43      // D10
+#endif
+
+#ifdef VARIANT_DEVKIT
+    // Generic ESP32 DevKit
+    #define PIN_BTN_A       4
+    #define PIN_BTN_B       5
+    #define PIN_LED         2
+    #define PIN_I2C_SDA     21
+    #define PIN_I2C_SCL     22
+    #define PIN_BUZZER      15
+    #define PIN_BATTERY     34
+    #define PIN_VIBRATION   13
+    #define USE_LITTLEFS    true
+#endif
+
+// ============================================================================
+// I2C ADDRESSES
+// ============================================================================
+#define I2C_ADDR_OLED       0x3C
+#define I2C_ADDR_EEPROM     0x50    // AT24C256 / FM24C64
+#define I2C_ADDR_EEPROM_ALT 0x57    // Alternate address
+
+// ============================================================================
+// DISPLAY SETTINGS
+// ============================================================================
+#define SCREEN_WIDTH        128
+#define SCREEN_HEIGHT       64
+#define OLED_RESET          -1
+
+// ============================================================================
+// CLOUD API SETTINGS
+// ============================================================================
+#define DEFAULT_CLOUD_URL   "https://backend-production-507c.up.railway.app"
+#define API_PREFIX          "/api/v1/pocket"
+#define API_TIMEOUT_MS      15000   // 15s for HTTPS (was 10s for HTTP)
+#define API_RETRY_MAX       3
+#define API_BACKOFF_BASE_MS 5000    // 5s initial backoff
+#define API_BACKOFF_MAX_MS  60000   // 60s max backoff
+
+// Device token constraints
+#define TOKEN_MAX_LEN       50      // apex_dev_ + 32 hex = 41 chars + padding
+#define DEVICE_ID_MAX_LEN   40      // UUID format
+
+// SD Card config paths
+#define CONFIG_FILENAME     "/config.json"
+#define HISTORY_DIR         "/history"
+#define MAX_WIFI_NETWORKS   3
+#define MAX_HISTORY_FILE_KB 100     // Truncate oldest at 100KB
+
+// LittleFS backup paths
+#define CLOUD_CONFIG_FILE   "/cloud_config.json"
+
+// ============================================================================
+// NETWORK SETTINGS (fallback if no SD config)
+// ============================================================================
+#ifdef VARIANT_WOKWI
+    #define WIFI_SSID       "Wokwi-GUEST"
+    #define WIFI_PASS       ""
+#else
+    // Fallback WiFi (used only if config.json has no wifi array)
+    #define WIFI_SSID       "YOUR_WIFI_NAME"
+    #define WIFI_PASS       "YOUR_WIFI_PASSWORD"
+#endif
+
+#define WIFI_CONNECT_TIMEOUT_MS 10000
+
+// ============================================================================
+// POWER MANAGEMENT
+// ============================================================================
+#define BATTERY_FULL_MV     4200    // Full charge voltage
+#define BATTERY_EMPTY_MV    3300    // Empty voltage (safe cutoff)
+#define BATTERY_R1          100     // Voltage divider R1 (k ohm)
+#define BATTERY_R2          100     // Voltage divider R2 (k ohm)
+
+#define SLEEP_TIMEOUT_MS    300000  // 5 minutes idle -> deep sleep
+#define SLEEP_WAKEUP_PIN    1       // GPIO1 (D0/BTN_A) - must be RTC GPIO
+
+// ============================================================================
+// AUDIO SETTINGS
+// ============================================================================
+#define BUZZER_CHANNEL      0       // LEDC channel for PWM
+#define TONE_LOVE           880     // A5 - love received
+#define TONE_POKE           440     // A4 - poke
+#define TONE_BOOT           523     // C5 - boot chime
+#define TONE_ERROR          220     // A3 - error
+#define TONE_SYNC           660     // E5 - sync complete
+
+// ============================================================================
+// SOUL SETTINGS
+// ============================================================================
+#define BETA_BASE           0.008f
+#define FLOOR_RATE          0.0001f
+#define MAX_E               100.0f
+#define INITIAL_E           1.0f
+#define INITIAL_FLOOR       1.0f
+
+#define E_PROTECTING        0.5f
+#define E_GUARDED           0.5f
+#define E_TENDER            1.0f
+#define E_WARM              2.0f
+#define E_FLOURISHING       5.0f
+#define E_RADIANT           12.0f
+#define E_TRANSCENDENT      30.0f
+
+// ============================================================================
+// TIMING
+// ============================================================================
+#define DEBOUNCE_MS         50
+#define LONG_PRESS_MS       800
+#define BLINK_MIN_MS        2000
+#define BLINK_MAX_MS        6000
+#define SAVE_INTERVAL_MS    60000   // Auto-save every minute
+#define WIFI_RETRY_MS       30000
+#define ANIMATION_FPS       30
+#define AUTO_SYNC_INTERVAL_MS 1800000  // 30 minutes
+
+// ============================================================================
+// EEPROM LAYOUT (for I2C EEPROM/FRAM)
+// ============================================================================
+#define EEPROM_MAGIC_ADDR   0x0000  // 4 bytes: "APEX"
+#define EEPROM_VERSION_ADDR 0x0004  // 1 byte: schema version (now 2)
+#define EEPROM_SOUL_ADDR    0x0010  // Soul state (80 bytes, expanded)
+#define EEPROM_CLOUD_ADDR   0x0060  // CloudState (32 bytes)
+#define EEPROM_MEMORY_ADDR  0x0100  // Extended memory (256 bytes)
+#define EEPROM_BACKUP_ADDR  0x0200  // Soul backup (80 bytes)
+
+#define EEPROM_MAGIC        0x41504558  // "APEX" in hex
+#define EEPROM_SCHEMA_VERSION 2         // Bumped for cloud fields
+
+// ============================================================================
+// VERSION (can be overridden by platformio.ini build flags)
+// ============================================================================
+#ifndef FW_VERSION
+#define FW_VERSION          "2.0.0"
+#endif
+#ifndef FW_BUILD
+#define FW_BUILD            "cloud-v112"
+#endif
+#define FIRMWARE_VERSION    FW_VERSION
+#define FIRMWARE_NAME       "ApexPocket MAX"
+
+#endif // APEXPOCKET_CONFIG_H
