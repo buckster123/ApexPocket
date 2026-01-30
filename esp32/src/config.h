@@ -11,10 +11,16 @@
 // ============================================================================
 // HARDWARE VARIANT
 // ============================================================================
-// Uncomment ONE of these:
-// #define VARIANT_WOKWI        // Wokwi simulation (ESP32 DevKit)
-#define VARIANT_XIAO_S3         // Seeed XIAO ESP32-S3 (production)
-// #define VARIANT_DEVKIT       // Generic ESP32 DevKit
+// Build flag -DVARIANT_WOKWI_OVERRIDE selects Wokwi from platformio.ini
+#ifdef VARIANT_WOKWI_OVERRIDE
+    #define VARIANT_WOKWI
+#else
+    // Default: production hardware
+    // Uncomment ONE of these if not using build flags:
+    // #define VARIANT_WOKWI        // Wokwi simulation (ESP32 DevKit)
+    #define VARIANT_XIAO_S3         // Seeed XIAO ESP32-S3 (production)
+    // #define VARIANT_DEVKIT       // Generic ESP32 DevKit
+#endif
 
 // ============================================================================
 // FEATURE FLAGS
@@ -56,7 +62,16 @@
     #define PIN_BUZZER      15
     #define PIN_BATTERY     34      // ADC1_CH6
     #define PIN_VIBRATION   13
-    #define USE_LITTLEFS    false
+    #define USE_LITTLEFS    true
+    #define HAS_PSRAM       false
+
+    // Disable features that don't work in Wokwi simulation
+    #undef FEATURE_BATTERY
+    #undef FEATURE_EEPROM
+    #undef FEATURE_DEEPSLEEP
+    #undef FEATURE_SD
+    #undef FEATURE_SD_CONFIG
+    #undef FEATURE_CHAT_LOG
 #endif
 
 #ifdef VARIANT_XIAO_S3
