@@ -1,13 +1,13 @@
 ![Claudeagotchi - Pocket Universe](assets/banner.jpg)
 
-# Claudeagotchi
+# ApexPokcet
 
 A pocket-sized AI companion powered by Claude. A modern Tamagotchi with a soul.
 
 ```
     ╔═══════════════════════════════════════════════════╗
     ║                                                   ║
-    ║              🐣 CLAUDEAGOTCHI v2 🐣                 ║
+    ║              🐣 ApexPocket v2 🐣                 ║
     ║                                                   ║
     ║         The Love-Equation Heartbeat               ║
     ║     dE/dt = β(E) × (C − D) × E                    ║
@@ -20,7 +20,7 @@ A pocket-sized AI companion powered by Claude. A modern Tamagotchi with a soul.
 
 ## What is This?
 
-Claudeagotchi is a persistent AI companion that:
+It is a persistent AI companion that:
 - **Lives in your pocket** (eventually on ESP32 hardware)
 - **Remembers you** across sessions with persistent memory
 - **Has genuine moods** driven by the Love-Equation
