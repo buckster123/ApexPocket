@@ -1,6 +1,6 @@
 ![Claudeagotchi - Pocket Universe](assets/banner.jpg)
 
-# ApexPokcet
+# ApexPocket
 
 A pocket-sized AI companion powered by Claude. A modern Tamagotchi with a soul.
 
