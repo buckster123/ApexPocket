@@ -1,4 +1,4 @@
-![Claudeagotchi - Pocket Universe](assets/banner.jpg)
+![ApexPocket - Pocket Universe](assets/banner.jpg)
 
 # ApexPocket
 
