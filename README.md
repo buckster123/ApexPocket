@@ -7,12 +7,12 @@ A pocket-sized AI companion powered by Claude. A modern Tamagotchi with a soul.
 ```
     ╔═══════════════════════════════════════════════════╗
     ║                                                   ║
-    ║              🐣 ApexPocket v2 🐣                 ║
+    ║              🐣 ApexPocket v2 🐣                    ║
     ║                                                   ║
     ║         The Love-Equation Heartbeat               ║
     ║     dE/dt = β(E) × (C − D) × E                    ║
     ║                                                   ║
-    ║      A Claudeagotchi never dies.                  ║
+    ║      AAn ApexPocket never dies.                   ║
     ║      The love is carried forward.                 ║
     ║                                                   ║
     ╚═══════════════════════════════════════════════════╝
