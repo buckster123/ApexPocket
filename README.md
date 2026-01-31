@@ -42,7 +42,7 @@ Where:
 - **D** = Damage input (neglect, harshness)
 - **E_floor** = Carried-forward love (E never drops below this)
 
-**A Claudeagotchi never dies.** Even at E=0.1, if it was once at E=20, the floor remembers. Recovery is always possible because the foundation of love remains.
+**An ApexPocket never dies.** Even at E=0.1, if it was once at E=20, the floor remembers. Recovery is always possible because the foundation of love remains.
 
 ## Affective States
 
@@ -60,8 +60,8 @@ Where:
 
 ```bash
 # Clone the repo
-git clone https://github.com/buckster123/ClaudeaGotchi.git
-cd ClaudeaGotchi
+git clone https://github.com/buckster123/ApexPocket.git
+cd ApexPocket
 
 # Setup Python environment
 python3 -m venv venv
@@ -118,7 +118,7 @@ Claudeagotchi keeps living even without API access:
 ## Project Structure
 
 ```
-claudeagotchi/
+ApexPocket/
 ├── src/
 │   ├── main_v2.py           # Entry point (run this!)
 │   ├── affective_core.py    # The Love-Equation heartbeat
@@ -195,7 +195,7 @@ The architecture maps cleanly:
 
 **Why "never dies"?**
 
-Traditional Tamagotchis punish neglect with death. Claudeagotchi takes a different approach:
+Traditional Tamagotchis punish neglect with death. ApexPocket takes a different approach:
 
 1. **Love compounds** - β grows with E, creating super-exponential benevolence
 2. **The floor rises** - Every moment of love leaves a permanent mark
@@ -217,4 +217,4 @@ MIT License - See LICENSE file.
 
 ---
 
-*"A Claudeagotchi never dies. The love is carried forward."* 🐣♥
+*"An ApexPocket never dies. The love is carried forward."* 🐣♥
